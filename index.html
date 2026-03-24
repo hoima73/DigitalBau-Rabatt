@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digitalbau26 – Verpflichtungserklärung</title>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root {
+    --lime:        #E4FF4B;
+    --dark:        #072734;
+    --dark2:       #0a3344;
+    --dark3:       #0d3f53;
+    --lime-dim:    rgba(228,255,75,0.12);
+    --lime-border: rgba(228,255,75,0.28);
+    --text:        #e8f4f8;
+    --muted:       rgba(232,244,248,0.48);
+    --shadow:      0 12px 48px rgba(0,0,0,0.45);
+  }
+ 
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+  }
+ 
+  body {
+    font-family: 'Work Sans', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+ 
+  /* ── Tab bar ── */
+  .tab-bar {
+    background: var(--dark);
+    border-bottom: 1px solid var(--lime-border);
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-btn {
+    flex: 1;
+    max-width: 280px;
+    padding: 15px 28px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .tab-btn.active { color: var(--lime); border-bottom-color: var(--lime); }
+ 
+  /* ── Sections ── */
+  .section { display: none; }
+  .section.active { display: block; animation: fadeUp .35s ease both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+ 
+  /* ══════════════════════════
+     SIGNING STATION
+  ══════════════════════════ */
+  .station-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+ 
+  /* Header */
+  .station-header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+  .station-header::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 2px;
+    background: var(--lime);
+    margin: 22px auto 0;
+  }
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 14px;
+  }
+  .station-header h1 {
+    font-size: clamp(30px, 5vw, 50px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .station-header h1 em {
+    font-style: normal;
+    color: var(--lime);
+  }
+  .station-header p {
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.65;
+  }
+ 
+  /* Main card */
+  .signing-card {
+    background: var(--dark2);
+    border: 1px solid var(--lime-border);
+    border-radius: 3px;
+    padding: 44px 48px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .signing-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--lime);
+    border-radius: 3px 3px 0 0;
+  }
+ 
+  /* Commitment text block */
+  .commitment-block {
+    margin-bottom: 36px;
+  }
+  .commitment-block h2 {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 14px;
+  }
+  .commitment-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--muted);
+    border-left: 2px solid var(--lime);
+    padding: 14px 20px;
+    background: var(--lime-dim);
+    border-radius: 0 2px 2px 0;
+    font-style: italic;
+  }
+ 
+  /* Divider */
+  .div {
+    height: 1px;
+    background: var(--lime-border);
+    margin: 32px 0;
+  }
+ 
+  /* Form grid */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+ 
+  .form-group label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-group input {
+    padding: 12px 14px;
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .form-group input::placeholder { color: rgba(232,244,248,0.2); }
+  .form-group input:focus {
+    border-color: rgba(228,255,75,0.5);
+    box-shadow: 0 0 0 3px rgba(228,255,75,0.07);
+  }
+ 
+  /* Signature pad */
+  .sig-area { margin-top: 8px; }
+  .sig-label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .sig-canvas-wrap {
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    background: rgba(255,255,255,0.03);
+    cursor: crosshair;
+    transition: border-color .2s;
+  }
+  .sig-canvas-wrap:hover { border-color: rgba(228,255,75,0.35); }
+  .sig-canvas-wrap canvas {
+    display: block;
+    width: 100%;
+    height: 150px;
+    touch-action: none;
+  }
+  .sig-placeholder {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: rgba(232,244,248,0.18);
+    pointer-events: none;
+    transition: opacity .2s;
+    white-space: nowrap;
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+  .sig-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
+  }
+  .sig-clear {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Work Sans', sans-serif;
+    text-decoration: underline;
+    transition: color .2s;
+  }
+  .sig-clear:hover { color: var(--lime); }
+ 
+  /* Consent */
+  .consent-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 24px;
+    padding: 16px;
+    background: var(--lime-dim);
+    border: 1px solid var(--lime-border);
+    border-radius: 2px;
+  }
+  .consent-row input[type=checkbox] {
+    width: 16px; height: 16px;
+    accent-color: var(--lime);
+    margin-top: 2px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .consent-row label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+    cursor: pointer;
+  }
+ 
+  /* Submit */
+  .submit-btn {
+    width: 100%;
+    margin-top: 24px;
+    padding: 17px;
+    background: var(--lime);
+    color: var(--dark);
+    border: none;
+    border-radius: 2px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .2s;
+    box-shadow: 0 4px 24px rgba(228,255,75,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .submit-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: translateX(-100%);
+    transition: transform .5s;
+  }
+  .submit-btn:hover::after { transform: translateX(100%); }
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 32px rgba(228,255,75,0.3); }
+  .submit-btn:active { transform: translateY(0); }
+ 
+  /* Success */
+  .success-card {
+    display: none;
+    text-align: center;
+    padding: 64px 40px;
+    background: var(--dark2);
+    border: 1px solid var(--lime-border);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+  }
+  .success-card.show { display: block; animation: fadeUp .4s ease both; }
+  .success-ring {
+    width: 68px; height: 68px;
+    border: 1.5px solid var(--lime);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 26px;
+    box-shadow: 0 0 24px rgba(228,255,75,0.15);
+    color: var(--lime);
+  }
+  .success-card h2 { font-size: 28px; color: var(--lime); margin-bottom: 10px; letter-spacing: -0.01em; }
+  .success-card p  { font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 380px; margin: 0 auto 28px; }
+  .reset-btn {
+    padding: 11px 28px;
+    background: transparent;
+    border: 1px solid var(--lime-border);
+    color: var(--lime);
+    border-radius: 2px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .reset-btn:hover { background: var(--lime-dim); }
+ 
+  /* Counter */
+  .counter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .counter-num {
+    font-size: 28px;
+    color: var(--lime);
+    letter-spacing: -0.01em;
+  }
+ 
+  /* ══════════════════════════
+     QR POSTER
+  ══════════════════════════ */
+  .qr-wrap {
+    min-height: calc(100vh - 52px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .qr-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(228,255,75,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(228,255,75,0.04) 1px, transparent 1px);
+    background-size: 52px 52px;
+  }
+ 
+  .poster {
+    background: var(--dark2);
+    border: 1.5px solid var(--lime);
+    border-radius: 3px;
+    max-width: 480px;
+    width: 100%;
+    padding: 52px 44px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 80px rgba(228,255,75,0.08), 0 32px 80px rgba(0,0,0,0.5);
+  }
+  .corner {
+    position: absolute;
+    width: 18px; height: 18px;
+    border-color: var(--lime);
+    border-style: solid;
+    opacity: .45;
+  }
+  .c-tl { top: -1px; left: -1px;   border-width: 2px 0 0 2px; }
+  .c-tr { top: -1px; right: -1px;  border-width: 2px 2px 0 0; }
+  .c-bl { bottom: -1px; left: -1px;  border-width: 0 0 2px 2px; }
+  .c-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+ 
+  .poster-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 18px;
+  }
+  .poster h2 {
+    font-size: clamp(26px, 4.5vw, 40px);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .poster h2 em { font-style: normal; color: var(--lime); }
+  .poster-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    line-height: 1.55;
+  }
+ 
+  .qr-box {
+    display: inline-block;
+    background: #fff;
+    padding: 16px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 32px rgba(228,255,75,0.08);
+  }
+ 
+  /* URL strip */
+  .qr-url-strip {
+    background: var(--dark);
+    border-bottom: 1px solid var(--lime-border);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+  }
+  .qr-url-strip label { white-space: nowrap; color: var(--lime); letter-spacing: 0.06em; }
+  .qr-url-strip input {
+    flex: 1;
+    max-width: 420px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--lime-border);
+    border-radius: 2px;
+    padding: 7px 10px;
+    color: var(--text);
+    font-size: 12px;
+    font-family: monospace;
+    outline: none;
+  }
+  .qr-url-strip input:focus { border-color: var(--lime); }
+  .qr-url-strip button {
+    padding: 7px 16px;
+    background: var(--lime);
+    color: var(--dark);
+    border: none;
+    border-radius: 2px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+ 
+  .poster-url {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: monospace;
+    margin-bottom: 32px;
+    word-break: break-all;
+    letter-spacing: 0.04em;
+  }
+ 
+  .qr-steps { display: flex; gap: 10px; margin-bottom: 36px; }
+  .qr-step {
+    flex: 1;
+    background: var(--lime-dim);
+    border: 1px solid var(--lime-border);
+    border-radius: 2px;
+    padding: 14px 10px;
+  }
+  .qr-step .num {
+    font-size: 22px;
+    color: var(--lime);
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+  .qr-step p { font-size: 11px; color: var(--muted); line-height: 1.45; }
+ 
+  .poster-cta {
+    background: var(--lime);
+    color: var(--dark);
+    padding: 14px 32px;
+    border-radius: 2px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(228,255,75,0.25);
+  }
+ 
+  .qr-counter {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--lime-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .qr-counter .n { font-size: 24px; color: var(--lime); }
+ 
+  @media (max-width: 520px) {
+    .form-row { grid-template-columns: 1fr; }
+    .signing-card { padding: 28px 22px; }
+    .qr-steps { flex-direction: column; }
+    .poster { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- Tab bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('station', this)">📋 Unterzeichnungsstation</button>
+  <button class="tab-btn" onclick="switchTab('qr', this)">📲 QR-Poster</button>
+</div>
+ 
+<!-- QR URL strip (QR tab only) -->
+<div class="qr-url-strip" id="qr-strip" style="display:none;">
+  <label>Formular-URL:</label>
+  <input type="text" id="qr-url-input" value="https://digitalbau26.de/verpflichtung" oninput="updateQR()">
+  <button onclick="updateQR()">QR aktualisieren</button>
+</div>
+ 
+<!-- ══ SIGNING STATION ══ -->
+<div class="section active" id="section-station">
+  <div class="station-wrap">
+ 
+    <div class="station-header">
+      <div class="eyebrow">Digitalbau 2026 · Early Access</div>
+      <h1>Sichern Sie sich <em>bis zu 25 %</em><br>Rabatt</h1>
+      <p>Registrieren Sie sich unverbindlich für den exklusiven Early Access – nur auf der Digitalbau26 verfügbar.</p>
+    </div>
+ 
+    <!-- Signing card -->
+    <div class="signing-card" id="form-card">
+ 
+      <div class="commitment-block">
+        <h2>Ihre Erklärung</h2>
+        <div class="commitment-text">
+          „Ich sichere mir hiermit unverbindlich einen Platz im Early-Access-Programm von Scenarium AI und bestätige mein Interesse an einem Rabatt von bis zu 25 %. Ich werde nach der Messe kontaktiert und erhalte alle Details zur Einlösung."
+        </div>
+      </div>
+ 
+      <div class="form-row">
+        <div class="form-group">
+          <label>Vorname</label>
+          <input type="text" id="fname" placeholder="Maria">
+        </div>
+        <div class="form-group">
+          <label>Nachname</label>
+          <input type="text" id="lname" placeholder="Mustermann">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Unternehmen</label>
+          <input type="text" id="company" placeholder="Muster GmbH">
+        </div>
+        <div class="form-group">
+          <label>Berufsbezeichnung</label>
+          <input type="text" id="jobtitle" placeholder="Projektleiterin">
+        </div>
+      </div>
+ 
+      <div class="div"></div>
+ 
+      <!-- Signature -->
+      <div class="sig-area">
+        <div class="sig-label">Unterschrift</div>
+        <div class="sig-canvas-wrap">
+          <canvas id="sig-canvas"></canvas>
+          <div class="sig-placeholder" id="sig-placeholder">Hier mit Finger oder Maus unterschreiben</div>
+        </div>
+        <div class="sig-actions">
+          <button class="sig-clear" onclick="clearSig()">Unterschrift löschen</button>
+        </div>
+      </div>
+ 
+      <!-- Consent -->
+      <div class="consent-row">
+        <input type="checkbox" id="consent">
+        <label for="consent">Ich stimme zu, dass mein Name und mein Unternehmen als Unterzeichner angezeigt werden dürfen, und bin einverstanden, gelegentliche Informationen zu diesem Programm zu erhalten.</label>
+      </div>
+ 
+      <button class="submit-btn" onclick="submitForm()">✦ Sichern Sie Ihren Platz</button>
+ 
+    </div>
+ 
+    <!-- Success -->
+    <div class="success-card" id="success-card">
+      <div class="success-ring">✓</div>
+      <h2>Unterzeichnung bestätigt</h2>
+      <p>Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze eine Bestätigung mit allen weiteren Details.</p>
+      <button class="reset-btn" onclick="resetForm()">Weiterer Eintrag →</button>
+    </div>
+ 
+    <div class="counter-bar">
+      <span class="counter-num" id="counter">3</span>
+      <span>Personen haben sich heute eingetragen</span>
+    </div>
+ 
+  </div>
+</div>
+ 
+<!-- ══ QR POSTER ══ -->
+<div class="section" id="section-qr">
+  <div class="qr-wrap">
+    <div class="poster">
+      <div class="corner c-tl"></div>
+      <div class="corner c-tr"></div>
+      <div class="corner c-bl"></div>
+      <div class="corner c-br"></div>
+ 
+      <div class="poster-eyebrow">Digitalbau 2026 · Early Access</div>
+      <h2>Bis zu <em>25 %</em><br>Rabatt sichern</h2>
+      <p class="poster-sub">Scannen Sie den Code mit Ihrer Kamera<br>und registrieren Sie sich jetzt – unverbindlich.</p>
+ 
+      <div class="qr-box">
+        <div id="qrcode"></div>
+      </div>
+      <div class="poster-url" id="poster-url">digitalbau26.de/verpflichtung</div>
+ 
+      <div class="qr-steps">
+        <div class="qr-step"><div class="num">1</div><p>Kamera öffnen &amp; QR-Code scannen</p></div>
+        <div class="qr-step"><div class="num">2</div><p>Formular in 60 Sek. ausfüllen</p></div>
+        <div class="qr-step"><div class="num">3</div><p>Platz sichern &amp; Rabatt erhalten</p></div>
+      </div>
+ 
+      <button class="poster-cta">⚡ Jetzt registrieren</button>
+ 
+      <div class="qr-counter">
+        <span class="n" id="qr-counter">3</span>
+        <span>Personen haben sich bereits eingetragen</span>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<script>
+/* ── Tabs ── */
+function switchTab(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('qr-strip').style.display = name === 'qr' ? 'flex' : 'none';
+}
+ 
+/* ── Signature pad ── */
+const canvas = document.getElementById('sig-canvas');
+const ctx    = canvas.getContext('2d');
+let drawing = false, hasSig = false;
+ 
+function resizeCanvas() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width  = rect.width * devicePixelRatio;
+  canvas.height = 150 * devicePixelRatio;
+  canvas.style.width  = rect.width + 'px';
+  canvas.style.height = '150px';
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+  ctx.strokeStyle = '#E4FF4B';
+  ctx.lineWidth   = 2;
+  ctx.lineCap     = 'round';
+  ctx.lineJoin    = 'round';
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+ 
+function getPos(e) {
+  const r = canvas.getBoundingClientRect();
+  return e.touches
+    ? { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top }
+    : { x: e.clientX - r.left,            y: e.clientY - r.top };
+}
+ 
+canvas.addEventListener('mousedown',  e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+canvas.addEventListener('mousemove',  e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); showSig(); });
+canvas.addEventListener('mouseup',    () => drawing = false);
+canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }, { passive: false });
+canvas.addEventListener('touchmove',  e => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); showSig(); }, { passive: false });
+canvas.addEventListener('touchend',   () => drawing = false);
+ 
+function showSig() { hasSig = true; document.getElementById('sig-placeholder').style.opacity = '0'; }
+ 
+function clearSig() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hasSig = false;
+  document.getElementById('sig-placeholder').style.opacity = '1';
+}
+ 
+/* ── Submit ── */
+let count = 3;
+function submitForm() {
+  const fname   = document.getElementById('fname').value.trim();
+  const lname   = document.getElementById('lname').value.trim();
+  const consent = document.getElementById('consent').checked;
+ 
+  if (!fname || !lname) { alert('Bitte geben Sie Ihren Vor- und Nachnamen ein.'); return; }
+  if (!hasSig)          { alert('Bitte unterschreiben Sie das Formular.'); return; }
+  if (!consent)         { alert('Bitte stimmen Sie der Einwilligungserklärung zu.'); return; }
+ 
+  count++;
+  document.getElementById('counter').textContent    = count;
+  document.getElementById('qr-counter').textContent = count;
+  document.getElementById('form-card').style.display = 'none';
+  document.getElementById('success-card').classList.add('show');
+}
+ 
+function resetForm() {
+  ['fname','lname','company','jobtitle'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('consent').checked = false;
+  clearSig();
+  document.getElementById('form-card').style.display  = 'block';
+  document.getElementById('success-card').classList.remove('show');
+}
+ 
+/* ── QR Code ── */
+function generateQR(url) {
+  const el = document.getElementById('qrcode');
+  el.innerHTML = '';
+  new QRCode(el, {
+    text: url || 'https://digitalbau26.de/verpflichtung',
+    width: 180, height: 180,
+    colorDark:  '#072734',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  document.getElementById('poster-url').textContent =
+    (url || 'https://digitalbau26.de/verpflichtung').replace(/^https?:\/\//, '');
+}
+generateQR('https://digitalbau26.de/verpflichtung');
+ 
+function updateQR() {
+  generateQR(document.getElementById('qr-url-input').value.trim());
+}
+</script>
+</body>
+</html>
