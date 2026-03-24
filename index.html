@@ -77,7 +77,6 @@
     padding: 56px 24px 80px;
   }
  
-  /* Header */
   .station-header {
     text-align: center;
     margin-bottom: 52px;
@@ -103,10 +102,7 @@
     letter-spacing: -0.01em;
     color: var(--text);
   }
-  .station-header h1 em {
-    font-style: normal;
-    color: var(--lime);
-  }
+  .station-header h1 em { font-style: normal; color: var(--lime); }
   .station-header p {
     margin-top: 16px;
     font-size: 15px;
@@ -117,7 +113,6 @@
     line-height: 1.65;
   }
  
-  /* Main card */
   .signing-card {
     background: var(--dark2);
     border: 1px solid var(--lime-border);
@@ -136,10 +131,7 @@
     border-radius: 3px 3px 0 0;
   }
  
-  /* Commitment text block */
-  .commitment-block {
-    margin-bottom: 36px;
-  }
+  .commitment-block { margin-bottom: 36px; }
   .commitment-block h2 {
     font-size: 13px;
     letter-spacing: 0.14em;
@@ -158,14 +150,8 @@
     font-style: italic;
   }
  
-  /* Divider */
-  .div {
-    height: 1px;
-    background: var(--lime-border);
-    margin: 32px 0;
-  }
+  .div { height: 1px; background: var(--lime-border); margin: 32px 0; }
  
-  /* Form grid */
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -198,7 +184,6 @@
     box-shadow: 0 0 0 3px rgba(228,255,75,0.07);
   }
  
-  /* Signature pad */
   .sig-area { margin-top: 8px; }
   .sig-label {
     font-size: 10px;
@@ -234,11 +219,7 @@
     font-style: italic;
     letter-spacing: 0.04em;
   }
-  .sig-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 6px;
-  }
+  .sig-actions { display: flex; justify-content: flex-end; margin-top: 6px; }
   .sig-clear {
     font-size: 11px;
     letter-spacing: 0.08em;
@@ -252,7 +233,6 @@
   }
   .sig-clear:hover { color: var(--lime); }
  
-  /* Consent */
   .consent-row {
     display: flex;
     align-items: flex-start;
@@ -270,14 +250,8 @@
     flex-shrink: 0;
     cursor: pointer;
   }
-  .consent-row label {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.55;
-    cursor: pointer;
-  }
+  .consent-row label { font-size: 12px; color: var(--muted); line-height: 1.55; cursor: pointer; }
  
-  /* Submit */
   .submit-btn {
     width: 100%;
     margin-top: 24px;
@@ -291,15 +265,14 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: transform .15s, box-shadow .2s;
+    transition: transform .15s, box-shadow .2s, opacity .2s;
     box-shadow: 0 4px 24px rgba(228,255,75,0.2);
     position: relative;
     overflow: hidden;
   }
   .submit-btn::after {
     content: '';
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
     transform: translateX(-100%);
     transition: transform .5s;
@@ -307,8 +280,21 @@
   .submit-btn:hover::after { transform: translateX(100%); }
   .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 32px rgba(228,255,75,0.3); }
   .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
  
-  /* Success */
+  /* Sending state spinner */
+  .spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(7,39,52,0.3);
+    border-top-color: var(--dark);
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+ 
   .success-card {
     display: none;
     text-align: center;
@@ -347,7 +333,6 @@
   }
   .reset-btn:hover { background: var(--lime-dim); }
  
-  /* Counter */
   .counter-bar {
     display: flex;
     align-items: center;
@@ -357,11 +342,7 @@
     color: var(--muted);
     letter-spacing: 0.02em;
   }
-  .counter-num {
-    font-size: 28px;
-    color: var(--lime);
-    letter-spacing: -0.01em;
-  }
+  .counter-num { font-size: 28px; color: var(--lime); letter-spacing: -0.01em; }
  
   /* ══════════════════════════
      QR POSTER
@@ -377,14 +358,12 @@
   }
   .qr-wrap::before {
     content: '';
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background-image:
       linear-gradient(rgba(228,255,75,0.04) 1px, transparent 1px),
       linear-gradient(90deg, rgba(228,255,75,0.04) 1px, transparent 1px);
     background-size: 52px 52px;
   }
- 
   .poster {
     background: var(--dark2);
     border: 1.5px solid var(--lime);
@@ -396,134 +375,47 @@
     position: relative;
     box-shadow: 0 0 80px rgba(228,255,75,0.08), 0 32px 80px rgba(0,0,0,0.5);
   }
-  .corner {
-    position: absolute;
-    width: 18px; height: 18px;
-    border-color: var(--lime);
-    border-style: solid;
-    opacity: .45;
-  }
+  .corner { position: absolute; width: 18px; height: 18px; border-color: var(--lime); border-style: solid; opacity: .45; }
   .c-tl { top: -1px; left: -1px;   border-width: 2px 0 0 2px; }
   .c-tr { top: -1px; right: -1px;  border-width: 2px 2px 0 0; }
   .c-bl { bottom: -1px; left: -1px;  border-width: 0 0 2px 2px; }
   .c-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
- 
-  .poster-eyebrow {
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--lime);
-    margin-bottom: 18px;
-  }
-  .poster h2 {
-    font-size: clamp(26px, 4.5vw, 40px);
-    line-height: 1.1;
-    margin-bottom: 8px;
-  }
+  .poster-eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); margin-bottom: 18px; }
+  .poster h2 { font-size: clamp(26px, 4.5vw, 40px); line-height: 1.1; margin-bottom: 8px; }
   .poster h2 em { font-style: normal; color: var(--lime); }
-  .poster-sub {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 36px;
-    line-height: 1.55;
-  }
- 
-  .qr-box {
-    display: inline-block;
-    background: #fff;
-    padding: 16px;
-    border-radius: 2px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 32px rgba(228,255,75,0.08);
-  }
- 
-  /* URL strip */
+  .poster-sub { font-size: 13px; color: var(--muted); margin-bottom: 36px; line-height: 1.55; }
+  .qr-box { display: inline-block; background: #fff; padding: 16px; border-radius: 2px; margin-bottom: 20px; box-shadow: 0 0 32px rgba(228,255,75,0.08); }
   .qr-url-strip {
     background: var(--dark);
     border-bottom: 1px solid var(--lime-border);
     padding: 10px 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 12px;
+    display: flex; align-items: center; gap: 12px; font-size: 12px;
   }
   .qr-url-strip label { white-space: nowrap; color: var(--lime); letter-spacing: 0.06em; }
   .qr-url-strip input {
-    flex: 1;
-    max-width: 420px;
+    flex: 1; max-width: 420px;
     background: rgba(255,255,255,0.04);
-    border: 1px solid var(--lime-border);
-    border-radius: 2px;
-    padding: 7px 10px;
-    color: var(--text);
-    font-size: 12px;
-    font-family: monospace;
-    outline: none;
+    border: 1px solid var(--lime-border); border-radius: 2px;
+    padding: 7px 10px; color: var(--text); font-size: 12px; font-family: monospace; outline: none;
   }
   .qr-url-strip input:focus { border-color: var(--lime); }
   .qr-url-strip button {
-    padding: 7px 16px;
-    background: var(--lime);
-    color: var(--dark);
-    border: none;
-    border-radius: 2px;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    white-space: nowrap;
+    padding: 7px 16px; background: var(--lime); color: var(--dark); border: none; border-radius: 2px;
+    font-family: 'Work Sans', sans-serif; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; white-space: nowrap;
   }
- 
-  .poster-url {
-    font-size: 11px;
-    color: var(--muted);
-    font-family: monospace;
-    margin-bottom: 32px;
-    word-break: break-all;
-    letter-spacing: 0.04em;
-  }
- 
+  .poster-url { font-size: 11px; color: var(--muted); font-family: monospace; margin-bottom: 32px; word-break: break-all; letter-spacing: 0.04em; }
   .qr-steps { display: flex; gap: 10px; margin-bottom: 36px; }
-  .qr-step {
-    flex: 1;
-    background: var(--lime-dim);
-    border: 1px solid var(--lime-border);
-    border-radius: 2px;
-    padding: 14px 10px;
-  }
-  .qr-step .num {
-    font-size: 22px;
-    color: var(--lime);
-    margin-bottom: 6px;
-    line-height: 1;
-  }
+  .qr-step { flex: 1; background: var(--lime-dim); border: 1px solid var(--lime-border); border-radius: 2px; padding: 14px 10px; }
+  .qr-step .num { font-size: 22px; color: var(--lime); margin-bottom: 6px; line-height: 1; }
   .qr-step p { font-size: 11px; color: var(--muted); line-height: 1.45; }
- 
   .poster-cta {
-    background: var(--lime);
-    color: var(--dark);
-    padding: 14px 32px;
-    border-radius: 2px;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
+    background: var(--lime); color: var(--dark); padding: 14px 32px; border-radius: 2px;
+    font-family: 'Work Sans', sans-serif; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; border: none; cursor: pointer;
     box-shadow: 0 4px 20px rgba(228,255,75,0.25);
   }
- 
   .qr-counter {
-    margin-top: 28px;
-    padding-top: 24px;
-    border-top: 1px solid var(--lime-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 12px;
-    color: var(--muted);
+    margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--lime-border);
+    display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 12px; color: var(--muted);
   }
   .qr-counter .n { font-size: 24px; color: var(--lime); }
  
@@ -537,16 +429,14 @@
 </head>
 <body>
  
-<!-- Tab bar -->
 <div class="tab-bar">
   <button class="tab-btn active" onclick="switchTab('station', this)">📋 Unterzeichnungsstation</button>
   <button class="tab-btn" onclick="switchTab('qr', this)">📲 QR-Poster</button>
 </div>
  
-<!-- QR URL strip (QR tab only) -->
 <div class="qr-url-strip" id="qr-strip" style="display:none;">
   <label>Formular-URL:</label>
-  <input type="text" id="qr-url-input" value="https://digitalbau26.de/verpflichtung" oninput="updateQR()">
+  <input type="text" id="qr-url-input" value="https://hoima73.github.io/DigitalBau-Rabatt/" oninput="updateQR()">
   <button onclick="updateQR()">QR aktualisieren</button>
 </div>
  
@@ -560,7 +450,6 @@
       <p>Registrieren Sie sich unverbindlich für den exklusiven Early Access – nur auf der Digitalbau26 verfügbar.</p>
     </div>
  
-    <!-- Signing card -->
     <div class="signing-card" id="form-card">
  
       <div class="commitment-block">
@@ -590,10 +479,19 @@
           <input type="text" id="jobtitle" placeholder="Projektleiterin">
         </div>
       </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>E-Mail</label>
+          <input type="email" id="email" placeholder="maria@beispiel.de">
+        </div>
+        <div class="form-group">
+          <label>Telefonnummer</label>
+          <input type="tel" id="phone" placeholder="+49 170 1234567">
+        </div>
+      </div>
  
       <div class="div"></div>
  
-      <!-- Signature -->
       <div class="sig-area">
         <div class="sig-label">Unterschrift</div>
         <div class="sig-canvas-wrap">
@@ -605,17 +503,15 @@
         </div>
       </div>
  
-      <!-- Consent -->
       <div class="consent-row">
         <input type="checkbox" id="consent">
         <label for="consent">Ich stimme zu, dass mein Name und mein Unternehmen als Unterzeichner angezeigt werden dürfen, und bin einverstanden, gelegentliche Informationen zu diesem Programm zu erhalten.</label>
       </div>
  
-      <button class="submit-btn" onclick="submitForm()">✦ Sichern Sie Ihren Platz</button>
+      <button class="submit-btn" id="submit-btn" onclick="submitForm()">✦ Sichern Sie Ihren Platz</button>
  
     </div>
  
-    <!-- Success -->
     <div class="success-card" id="success-card">
       <div class="success-ring">✓</div>
       <h2>Unterzeichnung bestätigt</h2>
@@ -635,28 +531,19 @@
 <div class="section" id="section-qr">
   <div class="qr-wrap">
     <div class="poster">
-      <div class="corner c-tl"></div>
-      <div class="corner c-tr"></div>
-      <div class="corner c-bl"></div>
-      <div class="corner c-br"></div>
- 
+      <div class="corner c-tl"></div><div class="corner c-tr"></div>
+      <div class="corner c-bl"></div><div class="corner c-br"></div>
       <div class="poster-eyebrow">Digitalbau 2026 · Early Access</div>
       <h2>Bis zu <em>25 %</em><br>Rabatt sichern</h2>
       <p class="poster-sub">Scannen Sie den Code mit Ihrer Kamera<br>und registrieren Sie sich jetzt – unverbindlich.</p>
- 
-      <div class="qr-box">
-        <div id="qrcode"></div>
-      </div>
-      <div class="poster-url" id="poster-url">digitalbau26.de/verpflichtung</div>
- 
+      <div class="qr-box"><div id="qrcode"></div></div>
+      <div class="poster-url" id="poster-url">hoima73.github.io/DigitalBau-Rabatt</div>
       <div class="qr-steps">
         <div class="qr-step"><div class="num">1</div><p>Kamera öffnen &amp; QR-Code scannen</p></div>
         <div class="qr-step"><div class="num">2</div><p>Formular in 60 Sek. ausfüllen</p></div>
         <div class="qr-step"><div class="num">3</div><p>Platz sichern &amp; Rabatt erhalten</p></div>
       </div>
- 
       <button class="poster-cta">⚡ Jetzt registrieren</button>
- 
       <div class="qr-counter">
         <span class="n" id="qr-counter">3</span>
         <span>Personen haben sich bereits eingetragen</span>
@@ -666,102 +553,136 @@
 </div>
  
 <script>
-/* ── Tabs ── */
-function switchTab(name, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('section-' + name).classList.add('active');
-  btn.classList.add('active');
-  document.getElementById('qr-strip').style.display = name === 'qr' ? 'flex' : 'none';
-}
+  // ─────────────────────────────────────────────
+  // ▶ PASTE YOUR GOOGLE APPS SCRIPT URL HERE
+  // ─────────────────────────────────────────────
+  const SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+  // ─────────────────────────────────────────────
  
-/* ── Signature pad ── */
-const canvas = document.getElementById('sig-canvas');
-const ctx    = canvas.getContext('2d');
-let drawing = false, hasSig = false;
+  /* ── Tabs ── */
+  function switchTab(name, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('section-' + name).classList.add('active');
+    btn.classList.add('active');
+    document.getElementById('qr-strip').style.display = name === 'qr' ? 'flex' : 'none';
+  }
  
-function resizeCanvas() {
-  const rect = canvas.parentElement.getBoundingClientRect();
-  canvas.width  = rect.width * devicePixelRatio;
-  canvas.height = 150 * devicePixelRatio;
-  canvas.style.width  = rect.width + 'px';
-  canvas.style.height = '150px';
-  ctx.scale(devicePixelRatio, devicePixelRatio);
-  ctx.strokeStyle = '#E4FF4B';
-  ctx.lineWidth   = 2;
-  ctx.lineCap     = 'round';
-  ctx.lineJoin    = 'round';
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+  /* ── Signature pad ── */
+  const canvas = document.getElementById('sig-canvas');
+  const ctx    = canvas.getContext('2d');
+  let drawing = false, hasSig = false;
  
-function getPos(e) {
-  const r = canvas.getBoundingClientRect();
-  return e.touches
-    ? { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top }
-    : { x: e.clientX - r.left,            y: e.clientY - r.top };
-}
+  function resizeCanvas() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width  = rect.width * devicePixelRatio;
+    canvas.height = 150 * devicePixelRatio;
+    canvas.style.width  = rect.width + 'px';
+    canvas.style.height = '150px';
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    ctx.strokeStyle = '#E4FF4B';
+    ctx.lineWidth   = 2;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
  
-canvas.addEventListener('mousedown',  e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
-canvas.addEventListener('mousemove',  e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); showSig(); });
-canvas.addEventListener('mouseup',    () => drawing = false);
-canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }, { passive: false });
-canvas.addEventListener('touchmove',  e => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); showSig(); }, { passive: false });
-canvas.addEventListener('touchend',   () => drawing = false);
+  function getPos(e) {
+    const r = canvas.getBoundingClientRect();
+    return e.touches
+      ? { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top }
+      : { x: e.clientX - r.left,            y: e.clientY - r.top };
+  }
+  canvas.addEventListener('mousedown',  e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+  canvas.addEventListener('mousemove',  e => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); showSig(); });
+  canvas.addEventListener('mouseup',    () => drawing = false);
+  canvas.addEventListener('mouseleave', () => drawing = false);
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }, { passive: false });
+  canvas.addEventListener('touchmove',  e => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); showSig(); }, { passive: false });
+  canvas.addEventListener('touchend',   () => drawing = false);
  
-function showSig() { hasSig = true; document.getElementById('sig-placeholder').style.opacity = '0'; }
+  function showSig() { hasSig = true; document.getElementById('sig-placeholder').style.opacity = '0'; }
+  function clearSig() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hasSig = false;
+    document.getElementById('sig-placeholder').style.opacity = '1';
+  }
  
-function clearSig() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  hasSig = false;
-  document.getElementById('sig-placeholder').style.opacity = '1';
-}
+  /* ── Submit ── */
+  let count = 3;
+  async function submitForm() {
+    const fname    = document.getElementById('fname').value.trim();
+    const lname    = document.getElementById('lname').value.trim();
+    const company  = document.getElementById('company').value.trim();
+    const jobtitle = document.getElementById('jobtitle').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const phone    = document.getElementById('phone').value.trim();
+    const consent  = document.getElementById('consent').checked;
  
-/* ── Submit ── */
-let count = 3;
-function submitForm() {
-  const fname   = document.getElementById('fname').value.trim();
-  const lname   = document.getElementById('lname').value.trim();
-  const consent = document.getElementById('consent').checked;
+    if (!fname || !lname) { alert('Bitte geben Sie Ihren Vor- und Nachnamen ein.'); return; }
+    if (!hasSig)          { alert('Bitte unterschreiben Sie das Formular.'); return; }
+    if (!consent)         { alert('Bitte stimmen Sie der Einwilligungserklärung zu.'); return; }
  
-  if (!fname || !lname) { alert('Bitte geben Sie Ihren Vor- und Nachnamen ein.'); return; }
-  if (!hasSig)          { alert('Bitte unterschreiben Sie das Formular.'); return; }
-  if (!consent)         { alert('Bitte stimmen Sie der Einwilligungserklärung zu.'); return; }
+    // Show loading state
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Wird übermittelt…';
  
-  count++;
-  document.getElementById('counter').textContent    = count;
-  document.getElementById('qr-counter').textContent = count;
-  document.getElementById('form-card').style.display = 'none';
-  document.getElementById('success-card').classList.add('show');
-}
+    // Capture signature as Base64 image
+    const signature = canvas.toDataURL('image/png');
  
-function resetForm() {
-  ['fname','lname','company','jobtitle'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('consent').checked = false;
-  clearSig();
-  document.getElementById('form-card').style.display  = 'block';
-  document.getElementById('success-card').classList.remove('show');
-}
+    // Send to Google Sheets
+    if (SCRIPT_URL !== 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fname, lname, company, jobtitle, email, phone, signature })
+        });
+      } catch (err) {
+        console.warn('Übermittlungsfehler:', err);
+      }
+    }
  
-/* ── QR Code ── */
-function generateQR(url) {
-  const el = document.getElementById('qrcode');
-  el.innerHTML = '';
-  new QRCode(el, {
-    text: url || 'https://digitalbau26.de/verpflichtung',
-    width: 180, height: 180,
-    colorDark:  '#072734',
-    colorLight: '#ffffff',
-    correctLevel: QRCode.CorrectLevel.H
-  });
-  document.getElementById('poster-url').textContent =
-    (url || 'https://digitalbau26.de/verpflichtung').replace(/^https?:\/\//, '');
-}
-generateQR('https://digitalbau26.de/verpflichtung');
+    // Success
+    count++;
+    document.getElementById('counter').textContent    = count;
+    document.getElementById('qr-counter').textContent = count;
+    document.getElementById('form-card').style.display = 'none';
+    document.getElementById('success-card').classList.add('show');
+    btn.disabled = false;
+    btn.innerHTML = '✦ Sichern Sie Ihren Platz';
+  }
  
-function updateQR() {
-  generateQR(document.getElementById('qr-url-input').value.trim());
-}
+  function resetForm() {
+    ['fname','lname','company','jobtitle','email','phone'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('consent').checked = false;
+    clearSig();
+    document.getElementById('form-card').style.display  = 'block';
+    document.getElementById('success-card').classList.remove('show');
+  }
+ 
+  /* ── QR Code ── */
+  function generateQR(url) {
+    const el = document.getElementById('qrcode');
+    el.innerHTML = '';
+    new QRCode(el, {
+      text: url || 'https://hoima73.github.io/DigitalBau-Rabatt/',
+      width: 180, height: 180,
+      colorDark:  '#072734',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+    document.getElementById('poster-url').textContent =
+      (url || 'https://hoima73.github.io/DigitalBau-Rabatt/').replace(/^https?:\/\//, '');
+  }
+  generateQR('https://hoima73.github.io/DigitalBau-Rabatt/');
+ 
+  function updateQR() {
+    generateQR(document.getElementById('qr-url-input').value.trim());
+  }
 </script>
 </body>
 </html>
